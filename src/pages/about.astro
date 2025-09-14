@@ -1,9 +1,26 @@
+---
+const pageTitle = "About Me";
+
+const identity = {
+    firstName: "Ivan",
+    country: "Hong Kong",
+    occupation: "student at HKUST",
+    hobbies: ["Badminton", "Tchoukball", "Movies", "Cantopop", "Anime"],
+};
+
+const skills = ["HTML", "CSS", "JavaScript", "Astro", "C++/C", "Python"];
+
+const happy = true;
+const finished = false;
+const goal = 3;
+---
+
 <!doctype html>
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>About</title>
+        <title>{pageTitle}</title>
     </head>
     <body>
         <a href="/">Home</a>
@@ -11,18 +28,49 @@
         <a href="/blog">Blog</a>
 
         <h1>My Astro Site</h1>
-        <h1>About Me</h1>
+        <h1>{pageTitle}</h1>
         <h2>... and my new Astro site!</h2>
 
         <p>
             I am working through Astro's introductory tutorial. This is the
-            second page on my website, and it's the first one I built
-            myself!
+            second page on my website, and it's the first one I built myself!
         </p>
 
         <p>
-            This site will update as I complete more of the tutorial, so
-            keep checking back and see how my journey is going!
+            This site will update as I complete more of the tutorial, so keep
+            checking back and see how my journey is going!
         </p>
+
+        <p>Here are few facts about me: &#128512</p>
+        <ul>
+            <li>My name is {identity.firstName}.</li>
+            <li>
+                I live in {identity.country} and I am currently a {
+                    identity.occupation
+                }.
+            </li>
+            <li>These are some of my hobbies:</li>
+            <ol>
+                {identity.hobbies.map((hobby) => <li>{hobby}</li>)}
+            </ol>
+            <!-- map() returns a new array like: [<li>badminton</li>, <li>gaming</li>, <li>hiking</li>] -->
+        </ul>
+        <p>My skills are:</p>
+        <ul>
+            {skills.map((skill) => <li>{skill}</li>)}
+        </ul>
+
+        <p>This is the section for conditionally render elements:</p>
+        {happy && <p>I am happy to be learning Astro!</p>}
+
+        {finished && <p>I finished this tutorial!</p>}
+
+        {
+            goal === 3 ? (
+                <p>My goal is to finish in 3 days.</p>
+            ) : (
+                <p>My goal is not 3 days.</p>
+            )
+        }
     </body>
 </html>
