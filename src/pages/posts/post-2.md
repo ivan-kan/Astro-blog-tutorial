@@ -9,4 +9,3 @@ image:
 pubDate: 2025-09-14
 tags: ["astro", "blogging", "learning in public", "successes"]
 ---
-# This is the second blog post 

@@ -9,4 +9,3 @@ image:
 pubDate: 2025-09-14
 tags: ["astro", "learning in public", "setbacks", "community"]
 ---
-# This is the third blog post
