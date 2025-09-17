@@ -1,7 +1,5 @@
 ---
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
-import "../styles/global.css";
+import BaseLayout from "../layouts/BaseLayout.astro";
 
 const pageTitle = "About Me";
 
@@ -23,79 +21,63 @@ const fontWeight = "bold";
 const textCase = "uppercase";
 ---
 
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>{pageTitle}</title>
-        <style define:vars={{ skillColor, fontWeight, textCase }}>
-            h1 {
-                color: purple;
-                font-size: 4rem;
-            }
-
-            .skill {
-                color: var(--skillColor);
-                font-weight: var(--fontWeight);
-                text-transform: var(--textCase);
-            }
-        </style>
-    </head>
-    <body>
-        <Header />
-
-        <h1>My Astro Site</h1>
-        <h1>{pageTitle}</h1>
-        <h2>... and my new Astro site!</h2>
-
-        <p>
-            I am working through Astro's introductory tutorial. This is the
-            second page on my website, and it's the first one I built myself!
-        </p>
-
-        <p>
-            This site will update as I complete more of the tutorial, so keep
-            checking back and see how my journey is going!
-        </p>
-
-        <p>Here are few facts about me: &#128512</p>
-        <ul>
-            <li>My name is {identity.firstName}.</li>
-            <li>
-                I live in {identity.country} and I am currently a {
-                    identity.occupation
-                }.
-            </li>
-            <li>These are some of my hobbies:</li>
-            <ol>
-                {identity.hobbies.map((hobby) => <li>{hobby}</li>)}
-            </ol>
-            <!-- map() returns a new array like: [<li>badminton</li>, <li>gaming</li>, <li>hiking</li>] -->
-        </ul>
-        <p>My skills are:</p>
-        <ul>
-            {skills.map((skill) => <li class="skill">{skill}</li>)}
-        </ul>
-
-        <p>This is the section for conditionally render elements:</p>
-        {happy && <p>I am happy to be learning Astro!</p>}
-
-        {finished && <p>I finished this tutorial!</p>}
-
-        {
-            goal === 3 ? (
-                <p>My goal is to finish in 3 days.</p>
-            ) : (
-                <p>My goal is not 3 days.</p>
-            )
+<BaseLayout pageTitle={pageTitle}>
+    <!-- is:global -> to apply the style to all selected elements in this page  -->
+    <style is:global define:vars={{ skillColor, fontWeight, textCase }}>
+        h1 {
+            color: purple;
+            font-size: 4rem;
         }
 
-        <Footer />
+        .skill {
+            color: var(--skillColor);
+            font-weight: var(--fontWeight);
+            text-transform: var(--textCase);
+        }
+    </style>
 
-        <script>
-            import "../scripts/menu.js";
-        </script>
-    </body>
-</html>
+    <h1>My Astro Site</h1>
+    <h2>... and my new Astro site!</h2>
+
+    <p>
+        I am working through Astro's introductory tutorial. This is the second
+        page on my website, and it's the first one I built myself!
+    </p>
+
+    <p>
+        This site will update as I complete more of the tutorial, so keep
+        checking back and see how my journey is going!
+    </p>
+
+    <p>Here are few facts about me: &#128512</p>
+    <ul>
+        <li>My name is {identity.firstName}.</li>
+        <li>
+            I live in {identity.country} and I am currently a {
+                identity.occupation
+            }.
+        </li>
+        <li>These are some of my hobbies:</li>
+        <ol>
+            {identity.hobbies.map((hobby) => <li>{hobby}</li>)}
+        </ol>
+        <!-- map() returns a new array like: [<li>badminton</li>, <li>gaming</li>, <li>hiking</li>] -->
+    </ul>
+    <p>My skills are:</p>
+    <ul>
+        {skills.map((skill) => <li class="skill">{skill}</li>)}
+    </ul>
+
+    <p>This is the section for conditionally render elements:</p>
+    {happy && <p>I am happy to be learning Astro!</p>}
+
+    {finished && <p>I finished this tutorial!</p>}
+
+    {
+        goal === 3 ? (
+            <p>My goal is to finish in 3 days.</p>
+        ) : (
+            <p>My goal is not 3 days.</p>
+        )
+    }
+</BaseLayout>
