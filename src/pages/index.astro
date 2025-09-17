@@ -12,6 +12,7 @@ const pageTitle = "Home Page";
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
+		<script is:inline src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 		<title>{pageTitle}</title>
 	</head>
 	<body>
@@ -22,7 +23,12 @@ const pageTitle = "Home Page";
 		<Footer />
 
 		<script>
-			import "../scripts/menu.js"
+			import "../scripts/menu.js";
+		</script>
+		<!-- Need to use a separate <script> -->
+		<script is:inline>
+			let title = $("h1");
+			title.css("color", "blue");
 		</script>
 	</body>
 </html>
