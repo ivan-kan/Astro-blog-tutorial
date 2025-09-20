@@ -1,31 +1,24 @@
 ---
-import BaseLayout from "./BaseLayout.astro"; // this is called nested layout
-const { frontmatter } = Astro.props;
+import BaseLayout from "../../layouts/BaseLayout.astro";
+const allPosts = Object.values(
+    import.meta.glob("../posts/*.md", { eager: true }),
+);
+const tags = [
+    ...new Set(allPosts.map((post: any) => post.frontmatter.tags).flat()),
+];
+const pageTitle = "Tag index";
 ---
 
-<BaseLayout pageTitle={frontmatter.title}>
-    <p>Published on: {frontmatter.pubDate.toString().slice(0, 10)}</p>
-    <p><em>{frontmatter.description}</em></p>
-
-    <p>Written by {frontmatter.author}</p>
-
-    <img
-        src={frontmatter.image.url}
-        width="300px"
-        alt={frontmatter.image.alt}
-    />
-
+<BaseLayout pageTitle={pageTitle}>
     <div class="tags">
         {
-            frontmatter.tags.map((tag: string) => (
+            tags.map((tag) => (
                 <p class="tag">
                     <a href={`/tags/${tag}`}>{tag}</a>
                 </p>
             ))
         }
     </div>
-
-    <slot />
 </BaseLayout>
 
 <style>

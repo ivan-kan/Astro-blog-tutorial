@@ -4,7 +4,6 @@ import BlogPost from '../components/BlogPost.astro';
 const allPosts = Object.values(
     import.meta.glob("./posts/*.md", { eager: true }),
 );
-
 // import.meta.glob() will return an array of objects, one for each blog post
 
 const pageTitle = "My Astro Learning Blog";
